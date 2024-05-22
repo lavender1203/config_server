@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package config;
+
+option go_package = "config/protobuf"; // 替换为你的实际导入路径
+
+
+service ConfigService {
+  rpc GetConfig (GetConfigRequest) returns (GetConfigResponse) {}
+  rpc SetConfig (SetConfigRequest) returns (SetConfigResponse) {} // 新增的方法
+}
+
+message GetConfigRequest {
+  string section = 1;
+  string key = 2;
+}
+
+message GetConfigResponse {
+  string value = 1;
+}
+
+message SetConfigRequest {
+  string section = 1;
+  string key = 2;
+  string value = 3;
+}
+
+message SetConfigResponse {
+  bool success = 1;
+}

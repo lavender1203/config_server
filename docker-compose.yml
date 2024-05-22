@@ -1,0 +1,25 @@
+# docker-compose.yml
+version: '3'
+services:
+  config-server:
+    image: config_server:1.0.0
+    container_name: config_server
+    build: .
+    ports:
+      - "50051:50051"
+    logging:
+      driver: "json-file"   #默认的文件日志驱动
+      options:
+        max-size: "500m"
+        max-file: "1"
+    environment:
+      - TZ=Asia/Shanghai
+      - PYTHONPATH=/app
+      - GRPC_SERVER_ADDRESS=192.168.10.151:50051
+      - ETCD_ENDPOINTS=192.168.10.151:2379
+    restart: always
+    command: ["/main"]
+networks:
+  default:
+    external:
+      name: data_parse
