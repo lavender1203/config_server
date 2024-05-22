@@ -16,10 +16,11 @@ services:
       - TZ=Asia/Shanghai
       - PYTHONPATH=/app
       - GRPC_SERVER_ADDRESS=192.168.10.151:50051
+      - GRPC_SERVER_LISTEN_PORT=50051
       - ETCD_ENDPOINTS=192.168.10.151:2379
     restart: always
     command: ["/main"]
 networks:
   default:
     external:
-      name: data_parse
+      name: data_process

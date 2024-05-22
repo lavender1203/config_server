@@ -64,9 +64,14 @@ func main() {
         log.Fatalf("Fail to connect to etcd: %v", err)
     }
     defer cli.Close()
-
+    // 从环境变量获取端口号
+    port := os.Getenv("GRPC_SERVER_LISTEN_PORT")
+    // 如果没有设置端口号，则默认为50051
+    if port == "" {
+        port = "50051"
+    }
     // 启动gRPC服务
-    lis, err := net.Listen("tcp", ":50051")
+    lis, err := net.Listen("tcp", ":" + port)
     if err != nil {
         log.Fatalf("failed to listen: %v", err)
     }
