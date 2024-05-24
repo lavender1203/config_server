@@ -10,9 +10,9 @@ import (
     "gopkg.in/ini.v1"
 )
 
-func InitConfig(appName string) {
+func InitConfig(appName string, filePath string) {
     // 读取.env文件
-    cfg, err := ini.Load(".env")
+    cfg, err := ini.Load(filePath)
     if err != nil {
         log.Fatalf("Fail to read file: %v", err)
     }
@@ -44,5 +44,6 @@ func InitConfig(appName string) {
 }
 
 func main() {
-    InitConfig("DATA_PROCESS")
+    InitConfig("DATA_PROCESS", "init/data_process/.env")
+    InitConfig("FLIGHT_TICKET", "init/flight_ticket/.env")
 }
