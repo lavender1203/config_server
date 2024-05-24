@@ -4,8 +4,6 @@ services:
   config-server:
     image: config_server:1.0.0
     container_name: config_server
-    volumes:
-      - .:/app
     build: .
     ports:
       - "50051:50051"
@@ -21,7 +19,7 @@ services:
       - GRPC_SERVER_LISTEN_PORT=50051
       - ETCD_ENDPOINTS=192.168.10.151:2379
     restart: always
-    command: ["main"]
+    command: ["/main"]
 networks:
   default:
     external:
