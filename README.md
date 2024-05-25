@@ -22,4 +22,4 @@ sudo docker-compose up -d
 
 
 ## 初始化配置命令
-sudo docker exec -it config_server /init/init
+sudo docker exec -it config_server /init_config

@@ -1,2 +1,4 @@
 __pycache__/*
 protobuf/__pycache__/*
+*.env
+*.pyc

@@ -5,6 +5,8 @@ services:
     image: config_server:1.0.0
     container_name: config_server
     build: .
+    volumes:
+      - ./init:/init
     ports:
       - "50051:50051"
     logging:

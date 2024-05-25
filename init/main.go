@@ -1,13 +1,16 @@
 package main
 
 import (
-    "context"
-    "fmt"
-    "log"
-    "time"
+	"context"
+	"fmt"
+	"log"
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
 
-    "go.etcd.io/etcd/client/v3"
-    "gopkg.in/ini.v1"
+	"go.etcd.io/etcd/client/v3"
+	"gopkg.in/ini.v1"
 )
 
 func InitConfig(appName string, filePath string) {
@@ -44,6 +47,15 @@ func InitConfig(appName string, filePath string) {
 }
 
 func main() {
-    InitConfig("DATA_PROCESS", "init/data_process/.env")
-    InitConfig("FLIGHT_TICKET", "init/flight_ticket/.env")
+    dirs, err := os.ReadDir("init")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, dir := range dirs {
+        if dir.IsDir() {
+            envPath := filepath.Join("init", dir.Name(), ".env")
+            InitConfig(strings.ToUpper(dir.Name()), envPath)
+        }
+    }
 }
